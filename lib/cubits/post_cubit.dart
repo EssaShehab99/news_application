@@ -14,7 +14,7 @@ class PostCubit extends Cubit<PostStates> {
 
   Future<void> insertPost({required Post post}) async {
     posts.insert(0, post);
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 3));
     emit(PostLoadedState());
   }
 
@@ -22,13 +22,16 @@ class PostCubit extends Cubit<PostStates> {
       {uri =
           'http://192.168.1.101:8000/api/v1/post/fetch-posts?API_PASSWORD=PVd09uByztpJ8clnnTCc4J'}) async {
 
-    emit(PostFetchPostState());
+    // emit(PostFetchPostState());
+    await Future.delayed(Duration(seconds: 2));
+
+    // emit(PostLoadedState());
 
   }
 
   Future<void> onLoading() async {
-    if (nextPage != null) await fetchPosts(uri: nextPage);
-    print(nextPage);
+    // if (nextPage != null) await fetchPosts(uri: nextPage);
+    // print(nextPage);
 
     // emit(PostLoadedState());
   }

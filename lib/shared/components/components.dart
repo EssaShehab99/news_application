@@ -307,7 +307,10 @@ Widget defaultAutoSizeText(
     AutoSizeText(
       text,
       textAlign: textAlign,
-      style: Theme.of(context).textTheme.headline4,
+      style: Theme.of(context).textTheme.headline4?.copyWith(
+        letterSpacing: 0.5,
+        wordSpacing: 0.5
+      ),
       wrapWords: false,
       maxFontSize: 13,
       minFontSize: 12,
