@@ -65,40 +65,38 @@ class ApplicationSetting extends StatelessWidget {
                                                         .headline3,
                                                   ),
                                                 ),
-                                                content: SizedBox(
-                                                  height: 180,
-                                                  child: Column(
-                                                    children: value
-                                                        .themeItems()
-                                                        .map((themeItem) =>
-                                                            RadioListTile<int>(
-                                                              controlAffinity:
-                                                                  ListTileControlAffinity
-                                                                      .leading,
-                                                              value: value
-                                                                  .themeItems()
-                                                                  .indexOf(
-                                                                      themeItem),
-                                                              groupValue: value
-                                                                  .themeModeValue,
-                                                              onChanged: (val) {
-                                                                value
-                                                                    .setThemeMode(
-                                                                        val!);
-                                                              },
-                                                              title: Text(
-                                                                themeItem,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .right,
-                                                                style: Theme.of(
-                                                                        context)
-                                                                    .textTheme
-                                                                    .headline2,
-                                                              ),
-                                                            ))
-                                                        .toList(),
-                                                  ),
+                                                content: Column(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: value
+                                                      .themeItems()
+                                                      .map((themeItem) =>
+                                                          RadioListTile<int>(
+                                                            controlAffinity:
+                                                                ListTileControlAffinity
+                                                                    .leading,
+                                                            value: value
+                                                                .themeItems()
+                                                                .indexOf(
+                                                                    themeItem),
+                                                            groupValue: value
+                                                                .themeModeValue,
+                                                            onChanged: (val) {
+                                                              value
+                                                                  .setThemeMode(
+                                                                      val!);
+                                                            },
+                                                            title: Text(
+                                                              themeItem,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .right,
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .headline2,
+                                                            ),
+                                                          ))
+                                                      .toList(),
                                                 )),
                                       ));
                             })
@@ -125,42 +123,40 @@ class ApplicationSetting extends StatelessWidget {
                                                       .headline3,
                                                 ),
                                               ),
-                                              content: SizedBox(
-                                                height: 120,
-                                                child: Column(
-                                                  children: value
-                                                      .languages()
-                                                      .map((language) =>
-                                                          RadioListTile<int>(
-                                                            controlAffinity:
-                                                                ListTileControlAffinity
-                                                                    .leading,
-                                                            value: value
-                                                                .languages()
-                                                                .indexOf(
-                                                                    language),
-                                                            groupValue: value
-                                                                .languageValue,
-                                                            onChanged: (val) {
-                                                              setState(() {
-                                                                value.setLanguage(
-                                                                    val!,
-                                                                    context);
-                                                              });
-                                                            },
-                                                            title: Text(
-                                                              language,
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .right,
-                                                              style: Theme.of(
-                                                                      context)
-                                                                  .textTheme
-                                                                  .headline2,
-                                                            ),
-                                                          ))
-                                                      .toList(),
-                                                ),
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: value
+                                                    .languages()
+                                                    .map((language) =>
+                                                        RadioListTile<int>(
+                                                          controlAffinity:
+                                                              ListTileControlAffinity
+                                                                  .leading,
+                                                          value: value
+                                                              .languages()
+                                                              .indexOf(
+                                                                  language),
+                                                          groupValue: value
+                                                              .languageValue,
+                                                          onChanged: (val) {
+                                                            setState(() {
+                                                              value.setLanguage(
+                                                                  val!,
+                                                                  context);
+                                                            });
+                                                          },
+                                                          title: Text(
+                                                            language,
+                                                            textAlign:
+                                                                TextAlign
+                                                                    .right,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .headline2,
+                                                          ),
+                                                        ))
+                                                    .toList(),
                                               )),
                                     ));
                           },

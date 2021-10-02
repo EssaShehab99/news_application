@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_conditional_rendering/conditional.dart';
 import 'package:news_application/cubits/post_cubit.dart';
 import 'package:news_application/cubits/post_states.dart';
 import 'package:news_application/cubits/title_cubit.dart';
@@ -10,6 +14,7 @@ import 'package:news_application/models/post/post.dart';
 import 'package:news_application/modules/about_application/about_application.dart';
 import 'package:news_application/modules/application_setting/application_setting.dart';
 import 'package:news_application/modules/post_editing/post_editing.dart';
+import 'package:news_application/modules/skeleton/skeleton.dart';
 import 'package:news_application/modules/title_editing/title_editing.dart';
 import 'package:news_application/shared/components/components.dart';
 import 'package:news_application/shared/components/constants.dart';
@@ -94,7 +99,13 @@ class NewsScreen extends StatelessWidget {
                                 Navigator.of(context)
                                     .pushNamed(TitleEditing.titleEditing);
 
-                              // if (item == 3) exit(0);
+                              if (item == 3){
+                                if (Platform.isAndroid) {
+                                  SystemNavigator.pop();
+                                } else if (Platform.isIOS) {
+                                  exit(0);
+                                }
+                              }
                             },
                           ),
                         )
@@ -123,36 +134,41 @@ class NewsScreen extends StatelessWidget {
                             bottom: false,
                             child: Builder(
                               builder: (context) {
-                                return DefaultSmartRefresher(
-                                  onRefresh: PostCubit.get(context).fetchPosts,
-                                  onLoading: PostCubit.get(context).onLoading,
-                                  child: CustomScrollView(
-                                    key: PageStorageKey<String>(
-                                        _newsTitle.id!.toString()),
-                                    physics: BouncingScrollPhysics(),
-                                    slivers: [
-                                      SliverOverlapInjector(
-                                          handle: NestedScrollView
-                                              .sliverOverlapAbsorberHandleFor(
-                                                  context)),
-                                      SliverPadding(
-                                        padding: EdgeInsets.all(2.0),
-                                        sliver: SliverList(
-                                          delegate: SliverChildBuilderDelegate(
-                                            (context, index) => childBuilder(
-                                                posts: _posts,
-                                                title: _newsTitle,
-                                                favoritePosts: _favoritePosts,
-                                                index: index),
-                                            childCount: childCount(
-                                                posts: _posts,
-                                                title: _newsTitle,
-                                                favoritePosts: _favoritePosts),
+                                return Conditional.single(
+                                  context: context,
+                                  conditionBuilder:(context) =>  state is PostLoadedState,
+                                  widgetBuilder:(context) =>  DefaultSmartRefresher(
+                                    onRefresh: PostCubit.get(context).fetchPosts,
+                                    onLoading: PostCubit.get(context).onLoading,
+                                    child: CustomScrollView(
+                                      key: PageStorageKey<String>(
+                                          _newsTitle.id!.toString()),
+                                      physics: BouncingScrollPhysics(),
+                                      slivers: [
+                                        SliverOverlapInjector(
+                                            handle: NestedScrollView
+                                                .sliverOverlapAbsorberHandleFor(
+                                                    context)),
+                                        SliverPadding(
+                                          padding: EdgeInsets.all(2.0),
+                                          sliver: SliverList(
+                                            delegate: SliverChildBuilderDelegate(
+                                              (context, index) => childBuilder(
+                                                  posts: _posts,
+                                                  title: _newsTitle,
+                                                  favoritePosts: _favoritePosts,
+                                                  index: index),
+                                              childCount: childCount(
+                                                  posts: _posts,
+                                                  title: _newsTitle,
+                                                  favoritePosts: _favoritePosts),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
+                                  fallbackBuilder: (context) => Skeleton(),
                                 );
                               },
                             ),

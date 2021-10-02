@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
     TitleCubit.get(context).titles.add(
         NewsTitle(id: 10, title: "المفضلات", typeTitle: TypeTitle.FAVORITE));
 
-    PostCubit.get(context).posts.add(Post(
+    PostCubit.get(context).insertPost(post: Post(
           id: 1,
           title:
               "I have some text, maybe long and a box, WxH fixed size. I've calculated that given my font size and height scale, I can fit L lines of text. So I put maxLines and ellipsize and it works in Android app (since line height is predictable), but doesn't in Flutter app.",
@@ -80,8 +80,8 @@ class _HomeState extends State<Home> {
           isRead: false,
           isFavorite: false,
         ));
-    PostCubit.get(context).posts.add(
-          Post(
+    PostCubit.get(context).insertPost(
+          post: Post(
             id: 1,
             title:
                 "I have some text, maybe long and a box, WxH fixed size. I've calculated that given my font size and height scale, I can fit L lines of text. So I put maxLines and ellipsize and it works in Android app (since line height is predictable), but doesn't in Flutter app.",

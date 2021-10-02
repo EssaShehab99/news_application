@@ -12,6 +12,7 @@ import 'package:news_application/shared/styles/colors.dart';
 import 'package:photo_view/photo_view.dart';
 
 import 'constants.dart';
+
 String shareText =
     ' ${"visit-us-on-facebook".tr().toString()} http://www.facebook.com/alyemennetblog';
 // List<String> languages= [
@@ -55,8 +56,8 @@ defaultMaterialButton({required Function onPressed, required Widget child}) =>
               onPressed: () {
                 onPressed();
               },
-          // highlightColor:   Colors.white.withOpacity(0.0),
-          splashColor:  Colors.white.withOpacity(0.0),
+              // highlightColor:   Colors.white.withOpacity(0.0),
+              splashColor: Colors.white.withOpacity(0.0),
               child: child,
             ));
 
@@ -136,8 +137,9 @@ Widget defaultTextFormField({
           contentPadding: const EdgeInsets.symmetric(horizontal: 20),
           hintStyle: Theme.of(context).textTheme.subtitle1,
           enabledBorder: OutlineInputBorder(
-              borderSide:  BorderSide(
-                width: 1,),
+              borderSide: BorderSide(
+                width: 1,
+              ),
               borderRadius: BorderRadius.circular(borderRadius)),
         ),
       ),
@@ -173,9 +175,7 @@ Widget defaultDropdownButton({
       onChanged: onChanged,
       onSaved: onSaved,
       items: list.map((val) {
-        return DropdownMenuItem(
-            value: val,
-            child: Text(val.title));
+        return DropdownMenuItem(value: val, child: Text(val.title));
       }).toList(),
     );
 
@@ -228,7 +228,8 @@ Future<dynamic> defaultConfirmDialog({
 }) async {
   AlertDialog alertDialog = AlertDialog(
     content: SizedBox(
-      child:  Column(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             "do-you-want-to-delete-the-post".tr().toString(),
@@ -317,7 +318,6 @@ Widget defaultAutoSizeText(
       maxLines: 5,
     );
 
-
 Widget defaultDismissible({
   required Widget child,
   required String key,
@@ -349,18 +349,16 @@ Widget defaultDismissible({
     );
 
 defaultDivider() => Builder(builder: (context) {
-      return Builder(
-        builder: (context) {
-          return Divider(
-            thickness: 0.4,
-            height: 0.0,
-            color: Theme.of(context).dividerColor,
-            indent: MediaQuery.of(context).size.width * 0.045,
-            endIndent: MediaQuery.of(context).size.width * 0.045,
-            // endIndent: MediaQuery.of(context).size.width*0.9,
-          );
-        }
-      );
+      return Builder(builder: (context) {
+        return Divider(
+          thickness: 0.4,
+          height: 0.0,
+          color: Theme.of(context).dividerColor,
+          indent: MediaQuery.of(context).size.width * 0.045,
+          endIndent: MediaQuery.of(context).size.width * 0.045,
+          // endIndent: MediaQuery.of(context).size.width*0.9,
+        );
+      });
     });
 
 Widget defaultGroupListTile({

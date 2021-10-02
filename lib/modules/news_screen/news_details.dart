@@ -96,17 +96,19 @@ class NewsDetails extends StatelessWidget {
                 images: post.remoteImageList,
                 onDismissed: (_) {},
               ),
-              // Container(
-              //     alignment: Alignment.center,
-              //     margin: EdgeInsets.only(top: 20),
-              //     child: StarButton(
-              //       isStarred: post.checkFavoritePost(id: post.id!),
-              //       valueChanged: (favoriteStatus) {
-              //         value.favoritePost(
-              //             post: value.postsList[0],
-              //             favoriteStatus: favoriteStatus);
-              //       },
-              //     )),
+              SizedBox(height: 40,),
+              Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(top: 20),
+                  child: StarButton(
+                    isStarred: PostCubit.get(context).checkFavoritePost(id: post.id!),
+                    valueChanged: (favoriteStatus) {
+                      PostCubit.get(context).favoritePost(
+                          post: post,
+                          favoriteStatus: favoriteStatus);
+                    },
+                  )),
+              SizedBox(height: 40,),
             ],
           ),
         ),
